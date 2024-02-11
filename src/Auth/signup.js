@@ -1,7 +1,7 @@
 import { useState,useEffect,useRef} from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import {useDispatch} from "react-redux"
-import { setisUser } from '../components/store';
+import { setisUser,setuserInfo } from '../components/store';
 import axios from "axios";
 import './SignupForm.css';
 import {ToastContainer,toast} from "react-toastify";
@@ -69,9 +69,9 @@ function Signup() {
         e.preventDefault();
         // console.log(formData)
         const response = await axios.post("http://localhost:5000/api/v1/user/signup",formData)
-
         if(!response.data.error){
             notify1("Successful SignUp !!")
+            dispatch(setuserInfo(response?.data?.data))
             dispatch(setisUser(true));
             navigate("/home");
             }
