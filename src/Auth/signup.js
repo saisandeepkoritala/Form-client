@@ -28,19 +28,29 @@ function Signup() {
     });
 
     const notify=(msg)=>{
-        toast.info(msg, {
-            progressStyle: { background: "red" },
-            theme: 'colored',
-            style: { background: "black", color: "red" },
-        });
+        toast.error(`${msg}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
     }
 
     const notify1=(msg)=>{
-        toast.info(msg, {
-            progressStyle: { background: "green" },
-            theme: 'colored',
-            style: { background: "black", color: "green" },
-        });
+        toast.success( `${msg}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
     }
     
     const handleChange = (e) => {

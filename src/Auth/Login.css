@@ -40,8 +40,9 @@
     padding: 15px 5px;
     color:black;
     font-size: 1rem;
-    border:2px solid black;
-    border-radius: 25px;
+    outline:2px solid blue;
+    border:2px solid white;
+    border-radius: 20px;
 }
 
 .login form .login-btn{
@@ -51,12 +52,18 @@
 }
 
 button[type="submit"]{
-    border:1px solid black;
+    outline:2px solid blue;
+    border:2px solid white;
     color:white;
     width:90%;
-    border-radius: 15px;
+    border-radius: 25px;
     background-color: rgb(16, 16, 201);
     padding: 10px 5px;
     margin-bottom: 5px;
     cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+button[type="submit"]:hover{
+    transform: scale(0.98);
 }
