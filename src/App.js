@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+import Services from "./components/Services";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import Login from "./Auth/login";
+import Signup from "./Auth/signup";
+import Navbar from "./components/Navbar";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector} from "react-redux";
 
 function App() {
+  const {isUser} = useSelector((store)=>store.user)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <BrowserRouter> 
+      {isUser && <Navbar />}
+      <div className="routes">
+        <Routes>
+          <Route element={(!isUser)?<Login />:<Home />} path="/"/>
+          <Route element={<Signup />} path="/signup"/>
+          <Route element={<Home />} path="/home"/>
+          <Route element={<About />} path="/about"/>
+          <Route element={<Contact />} path="/contact"/>
+          <Route element={<Services />} path="/services"/>
+        </Routes>
+      </div>
+      <div className="footer-card">
+        <Footer/>
+      </div>
+  </BrowserRouter>
+)}
 
 export default App;
