@@ -12,10 +12,13 @@ const Login = () => {
     const navigate = useNavigate();
     const inputEmailRef = useRef();
     const [Color,SetColor]=useState("red");
+    axios.defaults.withCredentials = true;
 
     useEffect(() => {
         inputEmailRef.current.focus();
-        axios.get("http://localhost:5000/api/v1/user/isAlive")
+        axios.get(`https://form-server-app.onrender.com/api/v1/user/isAlive`,{
+            withCredentials:true
+        })
         .then((res)=>{
             if(res.status===200){
                 SetColor("green")
@@ -48,11 +51,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const resp = await axios.post("http://localhost:5000/api/v1/user/login",{
+            const resp = await axios.post(`https://form-server-app.onrender.com/api/v1/user/login`,{
                 email:formData.username,
                 password:formData.password
             })
             if(resp.status===200){
+                console.log(resp)
                 dispatch(setuserInfo(resp?.data?.data))
                 dispatch(setisUser(true))
                 navigate("/home")
@@ -96,7 +100,7 @@ const Login = () => {
                 </div>
                 <div className='login-btn'>
                 <button type="submit">
-                    Login
+                    <span>Login</span>
                 </button>
                 </div>
             </form>
@@ -105,7 +109,7 @@ const Login = () => {
                 type="submit"
                 onClick={() => navigate("/signup")}
             >
-                Sign Up
+                <span>Sign Up</span>
             </button>
             <ColoredCircle color={Color}/>
         </div>

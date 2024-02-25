@@ -68,7 +68,9 @@ function Signup() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         // console.log(formData)
-        const response = await axios.post("http://localhost:5000/api/v1/user/signup",formData)
+        const response = await axios.post(`https://form-server-app.onrender.com/api/v1/user/signup`,formData,{
+            withCredentials:true
+        })
         if(!response.data.error){
             notify1("Successful SignUp !!")
             dispatch(setuserInfo(response?.data?.data))
@@ -84,7 +86,7 @@ function Signup() {
         e.preventDefault();
         if(formData.name && formData.email){
             try{
-                const resp= await axios.post("http://localhost:5000/api/v1/user/sendCode",{
+                const resp= await axios.post(`https://form-server-app.onrender.com/api/v1/user/sendCode`,{
                     name:formData.name,
                     email:formData.email
                 })
@@ -112,7 +114,7 @@ function Signup() {
         e.preventDefault();
         if(formData.email){
             try{
-                const resp = await axios.post("http://localhost:5000/api/v1/user/verifyCode",{
+                const resp = await axios.post(`https://form-server-app.onrender.com/api/v1/user/verifyCode`,{
                     email:formData.email,
                     code:code
                 })
@@ -172,7 +174,8 @@ function Signup() {
                         onChange={(e)=>Setcode(e.target.value)}
                         placeholder='enter code...'
                     />
-                <button type="submit" onClick={handleSubmitCode}>Send Code</button>
+                <button type="submit" onClick={handleSubmitCode}>
+                    <span>Send Code</span></button>
             </div>}
             {showVerify && <div className='vanishButton' onClick={handleCheckValid}>Verify</div>}
 
@@ -199,7 +202,7 @@ function Signup() {
                 placeholder='confirm password'
             />
             </div>}
-        {!vanish && <button type="submit">Sign Up</button>}
+        {!vanish && <button type="submit"><span>Sign Up</span></button>}
         </form>
         </div>
         </>
